@@ -1,2 +1,5 @@
-# web-340
-Assignments for class web-340
+# WEB 340 Node.js
+
+## Contributors
+- Professor Krasso
+- Boyd Vigness
