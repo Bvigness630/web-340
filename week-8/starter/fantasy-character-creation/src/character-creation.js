@@ -3,28 +3,30 @@
 const { readFile, writeFile } = require("fs").promises;
 const path = require("path");
 
-// Intentionally weak: unstable relative path
-const CHARACTER_FILE = "character.json";
+const CHARACTER_FILE = path.join(__dirname, "character.json");
 
 async function writeCharacter(character) {
   const filePath = CHARACTER_FILE;
 
-  const data =
-    typeof character === "string"
-      ? character
-      : JSON.stringify(character);
+  const data = JSON.stringify(character);
 
   await writeFile(filePath, data, "utf8");
+
   return true;
 }
 
-async function readCharacter() {
-  const filePath = CHARACTER_FILE;
+async function readCharacter(fileName = CHARACTER_FILE) {
+  const filePath = path.isAbsolute(fileName)
+    ? fileName
+    : path.join(__dirname, path.basename(fileName));
 
-  const data = await readFile(filePath, "utf8");
+  try {
+    const data = await readFile(filePath, "utf8");
 
-  // Intentionally weak: returns string instead of parsed object
-  return data;
+    return JSON.parse(data);
+  } catch (err) {
+    throw new Error("Character file does not exist");
+  }
 }
 
 module.exports = {
