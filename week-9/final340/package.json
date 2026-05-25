@@ -1,0 +1,12 @@
+{
+  "name": "nba-player-lookup",
+  "version": "1.0.0",
+  "description": "Small modular Node.js NBA Player Lookup application",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "devDependencies": {
+    "jest": "^29.0.0"
+  }
+}
